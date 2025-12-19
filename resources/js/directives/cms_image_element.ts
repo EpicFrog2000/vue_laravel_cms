@@ -88,7 +88,6 @@ export async function updatecms_images_values():Promise<actionResponse>{
 	return saveCmsData(structure);
 }
 
-
 export function getcurrentChosenElement(){
     return chosen_element;
 }

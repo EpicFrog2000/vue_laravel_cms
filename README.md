@@ -8,6 +8,27 @@ This project is a simple CMS integrating Vue.js and Laravel. No database needed.
 - CMS elements interactivity is implemented using Vue directives.
 - CMS data is currently stored in `/public/json/cms.json`.
 
+## Usage
+
+## Usage
+
+Press **Alt** on the site to highlight elements editable via the CMS.  
+Right-click an element to open the CMS menu. Changes are saved and persist after page refresh.
+
+### In Code
+
+Use **directives** to mark elements that should be managed by the CMS.  
+Pass a **name** as a property to indicate where data is stored.
+
+Example:
+```html
+<div v-cms-text-element="['text_test']" v-html="cmsData['text_test'] ?? 'Lorem ipsum'"></div>
+```
+If cms.json contains a value for ['<current_site_url>']['text_test'], it will bind to the element and be editable.
+If no value exists, the element shows the default ('Lorem ipsum') and is still editable.
+Saving updates the JSON so the changes are available when the page is loaded again.
+
+
 ## Future Plans
 
 TODO:

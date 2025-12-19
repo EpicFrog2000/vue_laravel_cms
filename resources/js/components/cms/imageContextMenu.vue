@@ -25,8 +25,6 @@ const cms_imege_element_contextMenuItems = [
 	}
 ];
 
-
-
 const showFiles = () => {
     dialog.open(ImagesList, {
         props: {
@@ -51,7 +49,6 @@ const showFiles = () => {
                     return;
                 }
                 element.src = new_src;
-                toast.add({severity:'info',summary:'Info',detail:'Zmieniono', life:3000});
             }
         }
     });
