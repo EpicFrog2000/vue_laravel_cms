@@ -33,7 +33,8 @@ cd vue_laravel_cms
 composer install
 ```
 
-```bash # Linux / macOS 
+```bash
+# Linux / macOS 
 cp .env.example .env
 # Windows CMD
 copy .env.example .env

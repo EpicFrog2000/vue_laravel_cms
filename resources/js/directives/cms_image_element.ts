@@ -76,7 +76,7 @@ function getStructure(){
 			if (!ref[path[i]]) ref[path[i]] = {};
 			ref = ref[path[i]];
 		}
-		ref[path[path.length - 1]] = decodedValue(el.src);
+		ref[path[path.length - 1]] = decodedValue(new URL(el.src).pathname);
 	}
 
 	return structure;

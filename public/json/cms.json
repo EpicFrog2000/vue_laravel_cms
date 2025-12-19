@@ -3,6 +3,18 @@
         "settings": {
             "title": "test title",
             "description": "test description"
+        },
+        "text_test": null,
+        "image_1": "/images/arrow_substract_secondary.svg",
+        "sample_link_element": {
+            "href": "https://vue_laravel_cms.test/Lorem%20ipsum",
+            "link_text": "Lorem ipsum",
+            "target": "Lorem ipsum"
+        },
+        "sample_link_element2": {
+            "href": "https://vue_laravel_cms.test/Lorem%20ipsum",
+            "link_text": "Lorem ipsum",
+            "target": "Lorem ipsum"
         }
     },
     "cms_test": {
@@ -17,7 +29,7 @@
             "link_text": "wertwert",
             "target": "_blank"
         },
-        "image_1": "http://zel.test/images/arrow_substract_secondary.svg",
+        "image_1": "/images/arrow_substract_secondary.svg",
         "slider_home": [
             {
                 "imagePath": {
@@ -105,7 +117,7 @@
             }
         ],
         "sample_link_element2": {
-            "href": "http://zel.test/Lorem%20ipsum",
+            "href": "Lorem%20ipsum",
             "link_text": "Lorem ipsumf",
             "target": "_self"
         }

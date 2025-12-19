@@ -32,7 +32,7 @@
 	/>
 	<br/>
 	<br/>
-	<div v-cms-text-element="['text_test']" v-html="cmsData['text_test']"></div>
+	<div v-cms-text-element="['text_test']" v-html="cmsData['text_test'] ?? 'Lorem ipsum'"></div>
 	<br/>
 	<br/>
 	<CustomComponent :cmsData="cmsData['slider_home']" :cms_path_value="['slider_home']"/>

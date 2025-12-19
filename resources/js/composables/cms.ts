@@ -5,7 +5,7 @@ export async function saveCmsData(cms_data: any):Promise<actionResponse> {
 	const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
 	if (!token) return <actionResponse>{ status_ok:false, message:'csrf_token not found'}
 
-    const slug = window.location.pathname.replace(/^\/|\/$/g, '');
+    const slug = window.location.pathname.replace(/^\/|\/$/g, '') || '/';
 
 	try{
 		const res = await fetch('/api/updateCmsData', {
