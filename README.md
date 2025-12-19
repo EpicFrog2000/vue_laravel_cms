@@ -33,6 +33,14 @@ cd vue_laravel_cms
 composer install
 ```
 
+```bash # Linux / macOS 
+cp .env.example .env
+# Windows CMD
+copy .env.example .env
+# Windows PowerShell
+Copy-Item .env.example .env
+```
+
 ```bash
 php artisan key:generate
 ```
