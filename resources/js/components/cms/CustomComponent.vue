@@ -17,15 +17,6 @@ const cmsData = ref(
 	(props.cmsData && props.cmsData.length ? props.cmsData : default_values)
 )
 
-
-// todo walidacja cms.json
-// todo atomiczne zapisywanie do storage może
-// todo video cms
-// todo logowanie sie jako admin
-// todo hide/show elements
-// todo dokumentacja
-// todo dodawanie komponentów do strony
-
 </script>
 
 
