@@ -1,0 +1,113 @@
+{
+    "/": {
+        "settings": {
+            "title": "test title",
+            "description": "test description"
+        }
+    },
+    "cms_test": {
+        "settings": {
+            "title": "test title",
+            "description": "test description",
+            "cos_innego": "erwtwert"
+        },
+        "text_test": "<div class=\"ql-editor\" contenteditable=\"false\"><p>qwerqwerqwer</p><p>qwer</p><p>qwerff</p></div>",
+        "sample_link_element": {
+            "href": "https://www.youtube.com/watch?v=F_BuZQW0hnM&list=RDF_BuZQW0hnM&start_radio=1",
+            "link_text": "wertwert",
+            "target": "_blank"
+        },
+        "image_1": "http://zel.test/images/arrow_substract_secondary.svg",
+        "slider_home": [
+            {
+                "imagePath": {
+                    "name": "img",
+                    "type": "imagePath",
+                    "value": "/images/fancySliderBg_1.avif"
+                },
+                "text": {
+                    "name": "txt",
+                    "type": "text",
+                    "value": "lorem ipsum"
+                }
+            },
+            {
+                "imagePath": {
+                    "name": "img",
+                    "type": "imagePath",
+                    "value": "/images/fancySliderBg_2.avif"
+                },
+                "text": {
+                    "name": "txt",
+                    "type": "text",
+                    "value": "lorem ipsum"
+                }
+            },
+            {
+                "imagePath": {
+                    "name": "img",
+                    "type": "imagePath",
+                    "value": "/images/oferta_bg_3.avif"
+                },
+                "text": {
+                    "name": "txt",
+                    "type": "text",
+                    "value": "lorem ipsum"
+                }
+            },
+            {
+                "imagePath": {
+                    "name": "img",
+                    "type": "imagePath",
+                    "value": "/images/oferta_bg_3.avif"
+                },
+                "text": {
+                    "name": "txt",
+                    "type": "text",
+                    "value": "lorem ipsum"
+                }
+            },
+            {
+                "imagePath": {
+                    "name": "img",
+                    "type": "imagePath",
+                    "value": "/images/oferta_bg_3.avif"
+                },
+                "text": {
+                    "name": "txt",
+                    "type": "text",
+                    "value": "lorem ipsum"
+                }
+            },
+            {
+                "imagePath": {
+                    "name": "img",
+                    "type": "imagePath",
+                    "value": "/images/oferta_bg_3.avif"
+                },
+                "text": {
+                    "name": "txt",
+                    "type": "text",
+                    "value": "lorem ipsum"
+                }
+            },
+            {
+                "imagePath": {
+                    "name": "img",
+                    "type": "imagePath",
+                    "value": "/images/oferta_bg_3.avif"
+                },
+                "text": {
+                    "name": "txt",
+                    "type": "text",
+                    "value": "lorem ipsum"
+                }
+            }
+        ],
+        "sample_link_element2": {
+            "href": "http://zel.test/Lorem%20ipsum",
+            "link_text": "Lorem ipsumf",
+            "target": "_self"
+        }
+    }
+}

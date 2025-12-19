@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+@import 'primeicons/primeicons.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+.ql-editor{
+    overflow: visible !important;
+    margin: 0 !important;
+	padding: 0 !important;
+    line-height: inherit !important;
+}
+
+.ql-tooltip{
+    z-index: 999 !important;
+}
+
+.ql-editor p {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+.ql-editor * {
+    line-height: inherit !important;
+}
+.ql-container{
+    font-family: inherit !important;
+    font-size: inherit !important;
+    margin: 0 !important;
+	padding: 0 !important;
+}
+
+.ql-container.ql-disabled .ql-tooltip {
+    visibility: visible !important;
+}
