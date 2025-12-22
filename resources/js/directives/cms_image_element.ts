@@ -3,8 +3,8 @@ import { saveCmsData } from "@/composables/cms";
 import { actionResponse } from '@/types/cmsTypes';
 
 interface handlerEvent{
-    event: EventListener | ((e: KeyboardEvent) => void));
-    event_type: String;
+	event?: EventListener | ((e: KeyboardEvent) => void);
+	event_type: keyof WindowEventMap;
 }
 
 interface CmsElement extends HTMLImageElement {
@@ -26,45 +26,39 @@ export default {
 			el.style.border = '2px solid red';
 			return;
 		}
+		el.__cmsHandlers = [];
 		el.cms_value_path = binding.value;
 		const cmStore = useImageContextMenuStore();
 
-		el.__cmsHandlers.push({event: cmStore.toggle, event_type: 'contextmenu'})
-		el.addEventListener('contextmenu', cmStore.toggle)
+		const contextHandler1 = cmStore.toggle;
+		const contextHandler2 = chose_element(el);
+		
+		el.__cmsHandlers.push({event: contextHandler1, event_type: 'contextmenu'})
+		el.addEventListener('contextmenu', contextHandler1)
 
-        el.__cmsHandlers.push({event: chose_element(el), event_type: 'contextmenu'}
-		el.addEventListener('contextmenu', chose_element(el))
+		el.__cmsHandlers.push({event: contextHandler2, event_type: 'contextmenu'})
+		el.addEventListener('contextmenu', contextHandler2)
+
 
 		const base = el.style.boxShadow;
-		el.__keyHandlers.push((e: KeyboardEvent) => {
-			if (e.altKey) el.style.boxShadow = '0 0 6px 2px rgba(255,255,0,0.7)';
-		})
-		el.__keyHandlers.push((e: KeyboardEvent) => {
-			if (!e.altKey) el.style.boxShadow = base;
-		})
-		window.addEventListener('keydown', el.__keyHandlers[0])
-		window.addEventListener('keyup', el.__keyHandlers[1])
+		const showBorder = (e: KeyboardEvent) => e.altKey && (el.style.boxShadow = '0 0 6px 2px rgba(255,255,0,0.7)');
+		const hideBorder = () => el.style.boxShadow = base;
+
+		el.__cmsHandlers.push({ event: showBorder, event_type: 'keydown' });
+		el.__cmsHandlers.push({ event: hideBorder, event_type: 'keyup' });
+
+		window.addEventListener('keydown', showBorder);
+		window.addEventListener('keyup', hideBorder);
 
 		cms_elements.push(el)
 	},
 	beforeUnmount(el: CmsElement) {
-		const index = cms_elements.indexOf(el);
-		if (index !== -1) cms_elements.splice(index, 1);
-		if (el.__cmsHandlers) {
-            el.__cmsHandlers.forEach(handler => {
-	            el.removeEventListener('contextmenu', handler);
-			    delete handler;
-            });
+		for (const h of el.__cmsHandlers) {
+			window.removeEventListener(h.event_type, h.event as any);
 		}
-
-		if (el.__keyHandlers) {
-			window.removeEventListener('keydown', el.__altKeyHandler);
-			delete el.__altKeyHandler;
-		}
-		if (el.__altKeyReleaseHandler) {
-			window.removeEventListener('keyup', el.__altKeyReleaseHandler);
-			delete el.__altKeyReleaseHandler;
-		}
+		el.__cmsHandlers = [];
+		const i = cms_elements.indexOf(el);
+		if (i !== -1) cms_elements.splice(i, 1);
 	}
 };
 
@@ -95,20 +89,4 @@ export async function updatecms_images_values():Promise<actionResponse>{
 
 export function getcurrentChosenElement(){
     return chosen_element;
-}
-
-
-class cms_directive_helper{
-    constructor(){
-
-    }
-
-    init(){
-
-    }
-
-
-    // todo:
-    // add events (alt,hover,hide/show,)
-
 }

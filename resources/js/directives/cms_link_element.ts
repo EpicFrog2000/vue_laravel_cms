@@ -3,11 +3,13 @@ import { CmsLink, defaultLinkValues } from "@/types/cmsTypes";
 import { saveCmsData } from "@/composables/cms";
 import { actionResponse } from "@/types/cmsTypes";
 
+interface handlerEvent{
+	event?: EventListener | ((e: KeyboardEvent) => void);
+	event_type: keyof WindowEventMap;
+}
+
 interface CmsElement extends HTMLLinkElement {
-	__cmsHandler?: EventListener;
-	__cmsHandler2?: EventListener;
-	__altKeyHandler?: (e: KeyboardEvent) => void;
-	__altKeyReleaseHandler?: (e: KeyboardEvent) => void;	
+	__cmsHandlers: handlerEvent[];
 	cms_value_path: any;
 }
 
@@ -25,41 +27,38 @@ export default {
 			el.style.border = '2px solid red';
 			return;
 		}
+		el.__cmsHandlers = []
 		el.cms_value_path = binding.value;
 		const cmStore = useLinkContextMenuStore();
 
-		el.__cmsHandler = cmStore.toggle
-		el.addEventListener('contextmenu', cmStore.toggle)
-		el.__cmsHandler2 = chose_element(el)
-		el.addEventListener('contextmenu', chose_element(el))
+		const contextHandler1 = cmStore.toggle;
+		const contextHandler2 = chose_element(el);
+		
+		el.__cmsHandlers.push({event: contextHandler1, event_type: 'contextmenu'})
+		el.addEventListener('contextmenu', contextHandler1)
+
+		el.__cmsHandlers.push({event: contextHandler2, event_type: 'contextmenu'})
+		el.addEventListener('contextmenu', contextHandler2)
 
 		const base = el.style.boxShadow;
-		el.__altKeyHandler = (e: KeyboardEvent) => {
-			if (e.altKey) el.style.boxShadow = '0 0 6px 2px rgba(0,0,255,0.7)';
-		}
-		el.__altKeyReleaseHandler = (e: KeyboardEvent) => {
-			if (!e.altKey) el.style.boxShadow = base;
-		}
-		window.addEventListener('keydown', el.__altKeyHandler)
-		window.addEventListener('keyup', el.__altKeyReleaseHandler)
+		const showBorder = (e: KeyboardEvent) => e.altKey && (el.style.boxShadow = '0 0 6px 2px rgba(0,0,255,0.7)');
+		const hideBorder = () => el.style.boxShadow = base;
+
+		el.__cmsHandlers.push({ event: showBorder, event_type: 'keydown' });
+		el.__cmsHandlers.push({ event: hideBorder, event_type: 'keyup' });
+
+		window.addEventListener('keydown', showBorder);
+		window.addEventListener('keyup', hideBorder);
+
 		cms_elements.push(el)
 	},
 	beforeUnmount(el: CmsElement) {
-		const index = cms_elements.indexOf(el);
-		if (index !== -1) cms_elements.splice(index, 1);
-		if (el.__cmsHandler) {
-			el.removeEventListener('contextmenu', el.__cmsHandler);
-			delete el.__cmsHandler;
+		for (const h of el.__cmsHandlers) {
+			window.removeEventListener(h.event_type, h.event as any);
 		}
-
-		if (el.__altKeyHandler) {
-			window.removeEventListener('keydown', el.__altKeyHandler);
-			delete el.__altKeyHandler;
-		}
-		if (el.__altKeyReleaseHandler) {
-			window.removeEventListener('keyup', el.__altKeyReleaseHandler);
-			delete el.__altKeyReleaseHandler;
-		}
+		el.__cmsHandlers = [];
+		const i = cms_elements.indexOf(el);
+		if (i !== -1) cms_elements.splice(i, 1);
 	}
 };
 

@@ -3,13 +3,17 @@ import { actionResponse } from '@/types/cmsTypes';
 
 let Quill:any = null;
 
+interface handlerEvent{
+	event?: EventListener | ((e: KeyboardEvent) => void);
+	event_type: keyof WindowEventMap;
+}
+
 interface CmsElement extends HTMLElement {
-	__cmsHandler?: EventListener;
-	__altKeyHandler?: (e: KeyboardEvent) => void;
-	__altKeyReleaseHandler?: (e: KeyboardEvent) => void;
+	__cmsHandlers: handlerEvent[];
 	cms_value_path: any;
 	quil: any;
 }
+
 
 const cms_elements: CmsElement[] = [];
 
@@ -60,7 +64,6 @@ function removeQuill(el: CmsElement) {
 	el.quil = null
 }
 
-
 export default {
 	beforeMount: async (el: CmsElement, binding: any) => {
 		if (!binding.value) {
@@ -69,6 +72,7 @@ export default {
 			return;
 		}
 		el.cms_value_path = binding.value;
+		el.__cmsHandlers = [];
 
 		if (!Quill && typeof document !== 'undefined') {
 			const { default: quill } = await import('quill')
@@ -76,36 +80,27 @@ export default {
 		}
 
 		const handler = MakeEditable(el)
-		el.__cmsHandler = handler
+		el.__cmsHandlers.push({event: handler, event_type: 'click'})
 		el.addEventListener('click', handler)
 
 		const base = el.style.boxShadow;
-		el.__altKeyHandler = (e: KeyboardEvent) => {
-			if (e.altKey) el.style.boxShadow = '0 0 6px 2px rgba(0,255,0,0.7)';
-		}
-		el.__altKeyReleaseHandler = (e: KeyboardEvent) => {
-			if (!e.altKey) el.style.boxShadow = base;
-		}
-		window.addEventListener('keydown', el.__altKeyHandler)
-		window.addEventListener('keyup', el.__altKeyReleaseHandler)
+		const showBorder = (e: KeyboardEvent) => e.altKey && (el.style.boxShadow = '0 0 6px 2px rgba(0,255,0,0.7)');
+		const hideBorder = () => el.style.boxShadow = base;
+
+		el.__cmsHandlers.push({ event: showBorder, event_type: 'keydown' });
+		el.__cmsHandlers.push({ event: hideBorder, event_type: 'keyup' });
+
+		window.addEventListener('keydown', showBorder);
+		window.addEventListener('keyup', hideBorder);
 		cms_elements.push(el)
 	},
 	beforeUnmount(el: CmsElement) {
-		const index = cms_elements.indexOf(el);
-		if (index !== -1) cms_elements.splice(index, 1);
-		if (el.__cmsHandler) {
-			el.removeEventListener('click', el.__cmsHandler);
-			delete el.__cmsHandler;
+		for (const h of el.__cmsHandlers) {
+			window.removeEventListener(h.event_type, h.event as any);
 		}
-
-		if (el.__altKeyHandler) {
-			window.removeEventListener('keydown', el.__altKeyHandler);
-			delete el.__altKeyHandler;
-		}
-		if (el.__altKeyReleaseHandler) {
-			window.removeEventListener('keyup', el.__altKeyReleaseHandler);
-			delete el.__altKeyReleaseHandler;
-		}
+		el.__cmsHandlers = [];
+		const i = cms_elements.indexOf(el);
+		if (i !== -1) cms_elements.splice(i, 1);
 	}
 };
 
