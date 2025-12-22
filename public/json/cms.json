@@ -31,7 +31,7 @@
                 }
             }
         ],
-        "text_test": "Lorem ipsum",
+        "text_test": "<div class=\"ql-editor\" contenteditable=\"false\"><p>Lorem ipsum</p></div>",
         "image_1": "/Lorem%20ipsum",
         "sample_link_element": {
             "href": "https://vue_laravel_cms.test/Lorem%20ipsum",
@@ -44,12 +44,12 @@
             "target": "Lorem ipsum"
         },
         "video_test": {
-            "video_path": "https://vue_laravel_cms.test/",
+            "video_path": "https://vue_laravel_cms.test/images/aokigahara-forest-dark-style.jpg",
             "autoplay": true,
             "muted": true,
             "loop": false,
             "controls": true,
-            "poster": null,
+            "poster": "/images/arrow_substract_secondary.svg",
             "preload": "auto"
         }
     },

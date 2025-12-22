@@ -24,7 +24,7 @@ const showFiles = (valueObj:any, e:Event) => {
         props: {
             header: 'Zmień obraz',
             style: {
-                width: '80vw',
+                width: 'auto',
                 height: '80vh',
             },
             modal: true

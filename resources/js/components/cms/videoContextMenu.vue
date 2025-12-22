@@ -137,7 +137,7 @@ const showFilesV = (e:Event) => {
     });
 }
 
-
+const videoError = ref(true);
 </script>
 <template>
 
@@ -145,9 +145,10 @@ const showFilesV = (e:Event) => {
 
 <Dialog v-model:visible="visible" modal header="Zmiana wideo">
     <div class="flex flex-col gap-4">
-        <div class="flex items-center gap-4" @click="showFilesV">
+        <div class="flex items-center gap-4 cursor-pointer" @click="showFilesV">
             <label for="input-video-path" class="font-semibold w-24">Video path</label>
-            <video :src="video_element_values.video_path ?? '/no_video.mp4'" :poster="video_element_values.poster" class="max-w-100"></video>
+            <video v-if="video_element_values.video_path && !videoError" @error="videoError = true" :src="video_element_values.video_path" :poster="video_element_values.poster" class="max-w-100"></video>
+            <div v-else>Brak video</div>
         </div>
         <div class="flex items-center gap-4">
             <label for="input-autoplay" class="font-semibold w-24">Autoplay</label>
@@ -165,7 +166,7 @@ const showFilesV = (e:Event) => {
             <label for="input-controls" class="font-semibold w-24">Controls</label>
             <Checkbox binary id="input-controls" v-model="video_element_values.controls"/>
         </div>
-        <div class="flex items-center gap-4" @click="showFiles">
+        <div class="flex items-center gap-4 cursor-pointer" @click="showFiles">
             <label for="input-poster" class="font-semibold w-24">Poster</label>
             <img :src="video_element_values.poster" alt="poster" class="max-w-100">
         </div>

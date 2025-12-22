@@ -33,7 +33,7 @@ const editCustomCompoenent = () => {
         props: {
             header: 'Zmień',
             style: {
-                width: '80vw',
+                width: 'auto',
                 height: '80vh',
             },
             modal: true
