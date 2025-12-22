@@ -3,19 +3,7 @@
         "settings": {
             "title": "test title",
             "description": "test description",
-            "cos_innego": "tywrty"
-        },
-        "text_test": "<div class=\"ql-editor\" contenteditable=\"false\"><p>Loresdfgsdfgsdfg <s>ipsum </s></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>sdfgsdfg</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>sdfgsdfgdsfg</li></ol><p>q<span class=\"ql-size-huge\">wermkqjwenrqwer</span></p><p><span class=\"ql-size-huge\">\\sadfnasdf</span></p></div>",
-        "image_1": "/images/youtube_icon.svg",
-        "sample_link_element": {
-            "href": "https://vue_laravel_cms.test/Lorem%20ipsum",
-            "link_text": "Lorem ipsum",
-            "target": "Lorem ipsum"
-        },
-        "sample_link_element2": {
-            "href": "https://vue_laravel_cms.test/Lorem%20ipsum",
-            "link_text": "Lorem ipsumqwer",
-            "target": "_self"
+            "cos_innego": "erwtwert"
         },
         "slider_home": [
             {
@@ -27,7 +15,7 @@
                 "text": {
                     "name": "txt",
                     "type": "text",
-                    "value": "lorem ipsum"
+                    "value": "lorem i"
                 }
             },
             {
@@ -39,70 +27,31 @@
                 "text": {
                     "name": "txt",
                     "type": "text",
-                    "value": "lorem ipsum"
-                }
-            },
-            {
-                "imagePath": {
-                    "name": "img",
-                    "type": "imagePath",
-                    "value": "/images/InstagramSliderBg.avif"
-                },
-                "text": {
-                    "name": "txt",
-                    "type": "text",
-                    "value": "lorem ipsum"
-                }
-            },
-            {
-                "imagePath": {
-                    "name": "img",
-                    "type": "imagePath",
-                    "value": "/images/InstagramSliderBg.avif"
-                },
-                "text": {
-                    "name": "txt",
-                    "type": "text",
-                    "value": "lorem ipsum"
-                }
-            },
-            {
-                "imagePath": {
-                    "name": "img",
-                    "type": "imagePath",
-                    "value": "/images/InstagramSliderBg.avif"
-                },
-                "text": {
-                    "name": "txt",
-                    "type": "text",
-                    "value": "lorem ipsum"
-                }
-            },
-            {
-                "imagePath": {
-                    "name": "img",
-                    "type": "imagePath",
-                    "value": "/images/InstagramSliderBg.avif"
-                },
-                "text": {
-                    "name": "txt",
-                    "type": "text",
-                    "value": "lorem ipsum"
-                }
-            },
-            {
-                "imagePath": {
-                    "name": "img",
-                    "type": "imagePath",
-                    "value": "/images/arrow_substract_secondary.svg"
-                },
-                "text": {
-                    "name": "txt",
-                    "type": "text",
-                    "value": "lorem ipsum"
+                    "value": "lorem i"
                 }
             }
-        ]
+        ],
+        "text_test": "Lorem ipsum",
+        "image_1": "/Lorem%20ipsum",
+        "sample_link_element": {
+            "href": "https://vue_laravel_cms.test/Lorem%20ipsum",
+            "link_text": "Lorem ipsum",
+            "target": "Lorem ipsum"
+        },
+        "sample_link_element2": {
+            "href": "https://vue_laravel_cms.test/Lorem%20ipsum",
+            "link_text": "Lorem ipsum",
+            "target": "Lorem ipsum"
+        },
+        "video_test": {
+            "video_path": "https://vue_laravel_cms.test/",
+            "autoplay": true,
+            "muted": true,
+            "loop": false,
+            "controls": true,
+            "poster": null,
+            "preload": "auto"
+        }
     },
     "cms_test": {
         "settings": {

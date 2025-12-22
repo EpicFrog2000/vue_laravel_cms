@@ -32,6 +32,19 @@
 	/>
 	<br/>
 	<br/>
+	<video 
+		v-cms-video-element="['video_test']"
+		:src="cmsData.video_test?.video_path ?? ''"
+		:autoplay="cmsData.video_test?.autoplay ?? true"
+		:muted="cmsData.video_test?.muted ?? true"
+		:loop="cmsData.video_test?.loop ?? false"
+		:controls="cmsData.video_test?.controls ?? true"
+		:poster="cmsData.video_test?.poster ?? ''"
+		:preload="cmsData.video_test?.preload ?? 'auto'"
+	></video>
+
+	<br/>
+	<br/>
 	<div v-cms-text-element="['text_test']" v-html="cmsData['text_test'] ?? 'Lorem ipsum'"></div>
 	<br/>
 	<br/>

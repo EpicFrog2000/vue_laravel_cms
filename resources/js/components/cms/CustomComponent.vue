@@ -21,7 +21,7 @@ const cmsData = ref(
 
 
 <template>
-	<div v-cms-custom-element:[cmsData]="props.cms_path_value" class="flex flex-row w-screen">
+	<div v-cms-custom-element:[cmsData]="props.cms_path_value" class="flex flex-row">
 		<div v-for="element_data in cmsData" class="flex flex-col basis-1/5">
 			<img alt="image" :src="element_data['imagePath'].value" />
 			<div v-html="element_data['text'].value"></div>

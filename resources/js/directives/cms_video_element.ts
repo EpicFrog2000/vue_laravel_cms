@@ -1,5 +1,5 @@
-import { CmsItemValue } from "@/types/cmsTypes";
-import { usecustomElementContextMenuStore } from "@/stores/customElementContextMenuStore";
+import { useVideoContextMenuStore } from "@/stores/videoContextMenuStore";
+import { CmsVideo, defaultVideoValues } from "@/types/cmsTypes";
 import { saveCmsData } from "@/composables/cms";
 import { actionResponse } from "@/types/cmsTypes";
 
@@ -8,10 +8,9 @@ interface handlerEvent{
 	event_type: keyof WindowEventMap;
 }
 
-interface CmsElement extends HTMLElement {
+interface CmsElement extends HTMLVideoElement {
 	__cmsHandlers: handlerEvent[];
 	cms_value_path: any;
-	cms_values: CmsItemValue[][];
 }
 
 const cms_elements: CmsElement[] = [];
@@ -25,13 +24,13 @@ const chose_element = (el:CmsElement) => () => {
 export default {
 	beforeMount: async (el: CmsElement, binding: any) => {
 		if (!binding.value) {
-			el.style.outline = '2px solid red';
+			el.style.border = '2px solid red';
 			return;
 		}
-		el.__cmsHandlers = [];
+		el.__cmsHandlers = []
 		el.cms_value_path = binding.value;
-		el.cms_values = binding.arg;
-		const cmStore = usecustomElementContextMenuStore()
+		const cmStore = useVideoContextMenuStore();
+
 		const contextHandler1 = cmStore.toggle;
 		const contextHandler2 = chose_element(el);
 		
@@ -42,7 +41,7 @@ export default {
 		el.addEventListener('contextmenu', contextHandler2)
 
 		const base = el.style.boxShadow;
-		const showBorder = (e: KeyboardEvent) => e.altKey && (el.style.boxShadow = '0 0 6px 2px rgba(0,255,255,0.7)');
+		const showBorder = (e: KeyboardEvent) => e.altKey && (el.style.boxShadow = '0 0 6px 2px rgba(125,0,255,0.7)');
 		const hideBorder = () => el.style.boxShadow = base;
 
 		el.__cmsHandlers.push({ event: showBorder, event_type: 'keydown' });
@@ -67,19 +66,8 @@ function decodedValue(value:string){
 	return value.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
 
-export function getValuesToSet(){
-	if(!chosen_element) return [];
-	return chosen_element.cms_values;
-}
 
-export function set_new_values(values:CmsItemValue[][]){
-	if(!chosen_element) return;
-	chosen_element.cms_values = values;
-	console.log(chosen_element.cms_values)
-}
-
-export function getStructure(){
-	if(!chosen_element) return;
+function getStructure(){
 	let structure: any = {};
 	for (const el of cms_elements) {
 		let ref = structure;
@@ -91,20 +79,28 @@ export function getStructure(){
 		}
 
 		const finalKey = path[path.length - 1];
-
-		if (!ref[finalKey]) {
-			ref[finalKey] = {};
-		}
-
-		ref[finalKey] = el.cms_values;
+		ref[finalKey] = <CmsVideo>{
+			...defaultVideoValues,
+			video_path: decodedValue(el.src),
+			autoplay: el.autoplay,
+			muted: el.muted,
+			loop: el.loop,
+			controls: el.controls,
+			poster: el.getAttribute('poster') || '',
+			preload: (el.getAttribute('preload') as 'auto' | 'metadata' | 'none') || 'auto',
+		};
 	}
+
 	return structure;
 }
 
-export async function updatecms_custom_element_values():Promise<actionResponse>{
-    const structure = getStructure();
+
+
+
+export async function updatecms_video_values():Promise<actionResponse>{
+	const structure = getStructure();
 	chosen_element = undefined;
-    return saveCmsData(structure);
+	return saveCmsData(structure);
 }
 
 export function getcurrentChosenElement(){

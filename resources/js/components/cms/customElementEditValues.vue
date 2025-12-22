@@ -5,6 +5,7 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import { CmsItemValueType, CmsItemValue } from '@/types/cmsTypes';
 import ImagesList from './filesList.vue';
+import { set_new_values } from '@/directives/cms_custom_element';
 const values_to_edit = ref<CmsItemValue[][]>([])
 
 onMounted(() => {
@@ -44,6 +45,7 @@ const showFiles = (valueObj:any, e:Event) => {
 
 const addElement = () => {
 	values_to_edit.value.push(JSON.parse(JSON.stringify(values_to_edit.value[values_to_edit.value.length - 1])))
+    set_new_values(values_to_edit.value)
 }
 
 
@@ -53,6 +55,7 @@ const removeElement = (index:number) => {
         return;
     }
 	values_to_edit.value.splice(index, 1)
+    set_new_values(values_to_edit.value)
 }
 
 
@@ -61,6 +64,7 @@ const changeOrderPrev = (index:number) => {
 	const a = values_to_edit.value[index - 1]
 	values_to_edit.value[index - 1] = values_to_edit.value[index]
 	values_to_edit.value[index] = a
+    set_new_values(values_to_edit.value)
 }
 
 const changeOrderNext = (index:number) => {
@@ -68,6 +72,7 @@ const changeOrderNext = (index:number) => {
 	const a = values_to_edit.value[index + 1]
 	values_to_edit.value[index + 1] = values_to_edit.value[index]
 	values_to_edit.value[index] = a
+    set_new_values(values_to_edit.value)
 }
 
 

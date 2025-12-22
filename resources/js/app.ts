@@ -13,7 +13,7 @@ import cms_element from './directives/cms_text_element'
 import cms_image_element from './directives/cms_image_element';
 import cms_link_element from './directives/cms_link_element';
 import cms_custom_element from './directives/cms_custom_element';
-
+import cms_video_element from './directives/cms_video_element';
 
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.bubble.css";
@@ -46,6 +46,7 @@ createInertiaApp({
             .directive('cms-image-element', cms_image_element)
             .directive('cms-link-element', cms_link_element)
             .directive('cms-custom-element', cms_custom_element)
+            .directive('cms-video-element', cms_video_element)
             .use(ToastService)
             .use(DialogService)
             .mount(el);

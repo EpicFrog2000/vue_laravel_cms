@@ -39,6 +39,7 @@ TODO:
 - option hide/show cms elements
 - documentation
 - creating and customizing new sites
+- fix savin custom element
 
 ## Run Locally
 

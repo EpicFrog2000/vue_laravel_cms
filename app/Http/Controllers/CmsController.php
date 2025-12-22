@@ -37,7 +37,10 @@ class CmsController extends Controller
             $cmsData[$validated['slug']] = [];
         }
 
-        $cmsData[$validated['slug']] = array_replace_recursive($cmsData[$validated['slug']], $validated['data']);
+        foreach($validated['data'] as $key => $value){
+            $cmsData[$validated['slug']][$key] = $value;
+        }
+
         file_put_contents($this->CMS_DATA_FILE_PATH, json_encode($cmsData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
         return response(200);

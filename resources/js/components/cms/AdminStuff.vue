@@ -5,7 +5,7 @@ import globalContextMenu from './globalContextMenu.vue';
 import imageContextMenu from './imageContextMenu.vue';
 import linkContextMenu from './linkContextMenu.vue';
 import customElementContextMenu from './customElementContextMenu.vue';
-
+import videoContextMenu from './videoContextMenu.vue';
 
 
 </script>
@@ -15,6 +15,7 @@ import customElementContextMenu from './customElementContextMenu.vue';
     <globalContextMenu />
     <imageContextMenu />
     <linkContextMenu />
+    <videoContextMenu />
     <customElementContextMenu />
     <Toast />
     <DynamicDialog />

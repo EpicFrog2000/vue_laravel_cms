@@ -20,6 +20,24 @@ export const defaultLinkValues: CmsLink = {
 	target: '_self'
 }
 
+export interface CmsVideo{
+	video_path: string
+	autoplay: boolean
+	muted: boolean
+	loop: boolean
+	controls: boolean
+	poster: string
+	preload: 'auto' | 'metadata' | 'none'
+}
+export const defaultVideoValues: CmsVideo = {
+	video_path: '',
+	autoplay: true,
+	muted: true,
+	loop: true,
+	controls: false,
+	poster: '',
+	preload: 'auto',
+}
 
 export interface PageSettings {
     title: string,
