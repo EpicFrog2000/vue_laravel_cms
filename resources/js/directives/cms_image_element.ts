@@ -2,11 +2,13 @@ import { useImageContextMenuStore } from '@/stores/imageContextMenuStore';
 import { saveCmsData } from "@/composables/cms";
 import { actionResponse } from '@/types/cmsTypes';
 
+interface handlerEvent{
+    event: EventListener | ((e: KeyboardEvent) => void));
+    event_type: String;
+}
+
 interface CmsElement extends HTMLImageElement {
-	__cmsHandler?: EventListener;
-	__cmsHandler2?: EventListener;
-	__altKeyHandler?: (e: KeyboardEvent) => void;
-	__altKeyReleaseHandler?: (e: KeyboardEvent) => void;
+	__cmsHandlers: handlerEvent[];
 	cms_value_path: any;
 }
 
@@ -27,32 +29,35 @@ export default {
 		el.cms_value_path = binding.value;
 		const cmStore = useImageContextMenuStore();
 
-		el.__cmsHandler = cmStore.toggle
+		el.__cmsHandlers.push({event: cmStore.toggle, event_type: 'contextmenu'})
 		el.addEventListener('contextmenu', cmStore.toggle)
-		el.__cmsHandler2 = chose_element(el)
+
+        el.__cmsHandlers.push({event: chose_element(el), event_type: 'contextmenu'}
 		el.addEventListener('contextmenu', chose_element(el))
 
 		const base = el.style.boxShadow;
-		el.__altKeyHandler = (e: KeyboardEvent) => {
+		el.__keyHandlers.push((e: KeyboardEvent) => {
 			if (e.altKey) el.style.boxShadow = '0 0 6px 2px rgba(255,255,0,0.7)';
-		}
-		el.__altKeyReleaseHandler = (e: KeyboardEvent) => {
+		})
+		el.__keyHandlers.push((e: KeyboardEvent) => {
 			if (!e.altKey) el.style.boxShadow = base;
-		}
-		window.addEventListener('keydown', el.__altKeyHandler)
-		window.addEventListener('keyup', el.__altKeyReleaseHandler)
+		})
+		window.addEventListener('keydown', el.__keyHandlers[0])
+		window.addEventListener('keyup', el.__keyHandlers[1])
 
 		cms_elements.push(el)
 	},
 	beforeUnmount(el: CmsElement) {
 		const index = cms_elements.indexOf(el);
 		if (index !== -1) cms_elements.splice(index, 1);
-		if (el.__cmsHandler) {
-			el.removeEventListener('contextmenu', el.__cmsHandler);
-			delete el.__cmsHandler;
+		if (el.__cmsHandlers) {
+            el.__cmsHandlers.forEach(handler => {
+	            el.removeEventListener('contextmenu', handler);
+			    delete handler;
+            });
 		}
 
-		if (el.__altKeyHandler) {
+		if (el.__keyHandlers) {
 			window.removeEventListener('keydown', el.__altKeyHandler);
 			delete el.__altKeyHandler;
 		}
@@ -90,4 +95,20 @@ export async function updatecms_images_values():Promise<actionResponse>{
 
 export function getcurrentChosenElement(){
     return chosen_element;
+}
+
+
+class cms_directive_helper{
+    constructor(){
+
+    }
+
+    init(){
+
+    }
+
+
+    // todo:
+    // add events (alt,hover,hide/show,)
+
 }
