@@ -47,7 +47,7 @@ export default {
 
         const base = el.style.boxShadow;
         const showBorder = (e: KeyboardEvent) =>
-            e.altKey &&
+            e.ctrlKey &&
             (el.style.boxShadow = '0 0 6px 2px rgba(125,0,255,0.7)');
         const hideBorder = () => (el.style.boxShadow = base);
 

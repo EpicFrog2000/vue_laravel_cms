@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useImageContextMenuStore } from '@/stores/ContextMenuStore';
+import { useCustomElementContextMenuStore } from '@/stores/ContextMenuStore';
 import ContextMenu from 'primevue/contextmenu';
 import { useDialog } from 'primevue/usedialog';
 import { onMounted, ref } from 'vue';
 import customElementEditValues from './customElementEditValues.vue';
 
 const cmRef = ref(null);
-const cmStore = useImageContextMenuStore();
+const cmStore = useCustomElementContextMenuStore();
 onMounted(() => {
     cmStore.setRef(cmRef.value);
 });
