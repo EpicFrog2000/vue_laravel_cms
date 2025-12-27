@@ -25,7 +25,7 @@ export const useLenis = defineStore('lenis', () => {
     function getLenis() {
         return lenis;
     }
-    function scrollTo(target: string | number | HTMLElement){
+    function scrollTo(target: string | number | HTMLElement) {
         lenis.scrollTo(target);
     }
     return { init, getLenis, scrollTo };

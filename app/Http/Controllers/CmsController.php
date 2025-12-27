@@ -11,7 +11,7 @@ class CmsController extends Controller
 
     public function __construct()
     {
-        $this->CMS_DATA_FILE_PATH = public_path('json/cms.json');
+        $this->CMS_DATA_FILE_PATH = storage_path('cms/cms.json');
     }
 
     public function updateCmsData(Request $request)

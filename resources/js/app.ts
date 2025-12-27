@@ -1,6 +1,5 @@
-import '../css/app.css';
 import '@animxyz/core/dist/animxyz.min.css';
-
+import '../css/app.css';
 
 import { createInertiaApp } from '@inertiajs/vue3';
 import Aura from '@primeuix/themes/aura';
@@ -9,18 +8,17 @@ import PrimeVue from 'primevue/config';
 import { createApp, h } from 'vue';
 const pinia = createPinia();
 
-import cms_element from './directives/cms_text_element'
+import cms_custom_element from './directives/cms_custom_element';
 import cms_image_element from './directives/cms_image_element';
 import cms_link_element from './directives/cms_link_element';
-import cms_custom_element from './directives/cms_custom_element';
+import cms_element from './directives/cms_text_element';
 import cms_video_element from './directives/cms_video_element';
 
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.bubble.css";
+import 'quill/dist/quill.bubble.css';
+import 'quill/dist/quill.core.css';
 
-import ToastService from 'primevue/toastservice';
 import DialogService from 'primevue/dialogservice';
-
+import ToastService from 'primevue/toastservice';
 
 createInertiaApp({
     title: (title) => title,

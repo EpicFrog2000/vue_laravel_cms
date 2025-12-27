@@ -22,12 +22,12 @@
                 "imagePath": {
                     "name": "img",
                     "type": "imagePath",
-                    "value": "/images/InstagramSliderBg.avif"
+                    "value": "/images/arrow_substract_secondary.svg"
                 },
                 "text": {
                     "name": "txt",
                     "type": "text",
-                    "value": "lorem i"
+                    "value": "lorem ihgfjfghj"
                 }
             }
         ],
@@ -44,12 +44,12 @@
             "target": "Lorem ipsum"
         },
         "video_test": {
-            "video_path": "https://vue_laravel_cms.test/images/aokigahara-forest-dark-style.jpg",
+            "video_path": "http://127.0.0.1:8000/images/aokigahara-forest-dark-style.jpg",
             "autoplay": true,
             "muted": true,
-            "loop": false,
-            "controls": true,
-            "poster": "/images/arrow_substract_secondary.svg",
+            "loop": true,
+            "controls": false,
+            "poster": "/images/bg_image_10.jpg",
             "preload": "auto"
         }
     },

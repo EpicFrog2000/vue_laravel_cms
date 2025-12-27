@@ -1,33 +1,27 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { useImageContextMenuStore } from '@/stores/ContextMenuStore';
 import ContextMenu from 'primevue/contextmenu';
-import { useToast } from 'primevue/usetoast';
 import { useDialog } from 'primevue/usedialog';
-
-import ImagesList from './filesList.vue';
-
-import { usecustomElementContextMenuStore } from '@/stores/customElementContextMenuStore';
+import { onMounted, ref } from 'vue';
+import customElementEditValues from './customElementEditValues.vue';
 
 const cmRef = ref(null);
-const cmStore = usecustomElementContextMenuStore();
+const cmStore = useImageContextMenuStore();
 onMounted(() => {
-	cmStore.setRef(cmRef.value);
+    cmStore.setRef(cmRef.value);
 });
 
-const toast = useToast();
 const dialog = useDialog();
 
 const cms_imege_element_contextMenuItems = [
-	{
-		label: 'Zmień',
+    {
+        label: 'Zmień',
         command: () => {
-            editCustomCompoenent()
-        }
-	}
+            editCustomCompoenent();
+        },
+    },
 ];
 
-
-import customElementEditValues from './customElementEditValues.vue';
 const editCustomCompoenent = () => {
     dialog.open(customElementEditValues, {
         props: {
@@ -36,11 +30,10 @@ const editCustomCompoenent = () => {
                 width: 'auto',
                 height: '80vh',
             },
-            modal: true
+            modal: true,
         },
     });
-}
-
+};
 </script>
 <template>
     <ContextMenu ref="cmRef" :model="cms_imege_element_contextMenuItems" />

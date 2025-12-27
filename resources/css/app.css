@@ -5,29 +5,29 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
-.ql-editor{
+.ql-editor {
     overflow: visible !important;
     margin: 0 !important;
-	padding: 0 !important;
+    padding: 0 !important;
     line-height: inherit !important;
 }
 
-.ql-tooltip{
+.ql-tooltip {
     z-index: 999 !important;
 }
 
 .ql-editor p {
-	margin: 0 !important;
-	padding: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 .ql-editor * {
     line-height: inherit !important;
 }
-.ql-container{
+.ql-container {
     font-family: inherit !important;
     font-size: inherit !important;
     margin: 0 !important;
-	padding: 0 !important;
+    padding: 0 !important;
 }
 
 .ql-container.ql-disabled .ql-tooltip {

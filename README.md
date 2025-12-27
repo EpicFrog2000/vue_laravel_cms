@@ -6,7 +6,7 @@ This project is a simple CMS integrating Vue.js and Laravel. No database needed.
 ## Features
 
 - CMS elements interactivity is implemented using Vue directives.
-- CMS data is currently stored in `/public/json/cms.json`.
+- CMS data is currently stored in `storage/cms/cms.json`.
 
 ## Usage
 
@@ -33,13 +33,12 @@ Saving updates the JSON so the changes are available when the page is loaded aga
 
 TODO:
 - Validate cms.json
-- change cms.json to be in storage and allow for atomic operations
+- change cms.json to allow for atomic operations
 - more types cms elements
 - login to obtain admin permissions
 - option hide/show cms elements
 - documentation
 - creating and customizing new sites
-- fix savin custom element
 
 ## Run Locally
 
