@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import ContextMenu from 'primevue/contextmenu';
-import { useToast } from 'primevue/usetoast';
 import { getcurrentChosenElement } from '@/directives/cms_image_element';
+import { useImageContextMenuStore } from '@/stores/ContextMenuStore';
+import ContextMenu from 'primevue/contextmenu';
 import { useDialog } from 'primevue/usedialog';
-import { useImageContextMenuStore } from '@/stores/imageContextMenuStore';
+import { useToast } from 'primevue/usetoast';
+import { onMounted, ref } from 'vue';
 import ImagesList from './filesList.vue';
 
 const cmRef = ref(null);
 const cmStore = useImageContextMenuStore();
 onMounted(() => {
-	cmStore.setRef(cmRef.value);
+    cmStore.setRef(cmRef.value);
 });
 
 const toast = useToast();
 const dialog = useDialog();
 
 const cms_imege_element_contextMenuItems = [
-	{
-		label: 'Zmień obraz',
+    {
+        label: 'Zmień obraz',
         command: () => {
-            showFiles()
-        }
-	}
+            showFiles();
+        },
+    },
 ];
 
 const showFiles = () => {
@@ -39,24 +39,26 @@ const showFiles = () => {
             choose: true,
         },
         onClose: (options) => {
-            if(!options) return;
+            if (!options) return;
             const data = options.data;
             if (data) {
                 const new_src = data.src;
                 const element = getcurrentChosenElement();
-                if(!element){
-                    toast.add({severity:'info',summary:'Info',detail:'Nie wybrano elementów', life:3000});
+                if (!element) {
+                    toast.add({
+                        severity: 'info',
+                        summary: 'Info',
+                        detail: 'Nie wybrano elementów',
+                        life: 3000,
+                    });
                     return;
                 }
                 element.src = new_src;
             }
-        }
+        },
     });
-}
-
+};
 </script>
 <template>
-
     <ContextMenu ref="cmRef" :model="cms_imege_element_contextMenuItems" />
-
 </template>

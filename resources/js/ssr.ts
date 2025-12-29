@@ -5,22 +5,20 @@ import createServer from '@inertiajs/vue3/server';
 import { createSSRApp, h } from 'vue';
 import { renderToString } from 'vue/server-renderer';
 
-
 import Aura from '@primeuix/themes/aura';
 import { createPinia } from 'pinia';
 import PrimeVue from 'primevue/config';
 const pinia = createPinia();
 
-
-import cms_text_element from './directives/cms_text_element'
+import 'quill/dist/quill.bubble.css';
+import 'quill/dist/quill.core.css';
+import cms_custom_element from './directives/cms_custom_element';
 import cms_image_element from './directives/cms_image_element';
 import cms_link_element from './directives/cms_link_element';
-import cms_custom_element from './directives/cms_custom_element';
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.bubble.css";
+import cms_text_element from './directives/cms_text_element';
 
-import ToastService from 'primevue/toastservice';
 import DialogService from 'primevue/dialogservice';
+import ToastService from 'primevue/toastservice';
 
 createServer(
     (page) =>
@@ -39,19 +37,19 @@ createServer(
             },
             setup: ({ App, props, plugin }) =>
                 createSSRApp({ render: () => h(App, props) })
-                .use(plugin)
-                .use(PrimeVue, {
-                    theme: {
-                        preset: Aura,
-                    },
-                })
-                .directive('cms-text-element', cms_text_element)
-                .directive('cms-image-element', cms_image_element)
-                .directive('cms-link-element', cms_link_element)
-                .directive('cms-custom-element', cms_custom_element)
-                .use(ToastService)
-                .use(DialogService)
-                .use(pinia)
-            }),
+                    .use(plugin)
+                    .use(PrimeVue, {
+                        theme: {
+                            preset: Aura,
+                        },
+                    })
+                    .directive('cms-text-element', cms_text_element)
+                    .directive('cms-image-element', cms_image_element)
+                    .directive('cms-link-element', cms_link_element)
+                    .directive('cms-custom-element', cms_custom_element)
+                    .use(ToastService)
+                    .use(DialogService)
+                    .use(pinia),
+        }),
     { cluster: true },
 );

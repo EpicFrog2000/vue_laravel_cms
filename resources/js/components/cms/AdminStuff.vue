@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import Toast from 'primevue/toast';
 import DynamicDialog from 'primevue/dynamicdialog';
+import Toast from 'primevue/toast';
+import customElementContextMenu from './customElementContextMenu.vue';
 import globalContextMenu from './globalContextMenu.vue';
 import imageContextMenu from './imageContextMenu.vue';
 import linkContextMenu from './linkContextMenu.vue';
-import customElementContextMenu from './customElementContextMenu.vue';
 import videoContextMenu from './videoContextMenu.vue';
-
-
 </script>
 <template>
-
     <!-- admin stuff -->
     <globalContextMenu />
     <imageContextMenu />
@@ -19,6 +16,4 @@ import videoContextMenu from './videoContextMenu.vue';
     <customElementContextMenu />
     <Toast />
     <DynamicDialog />
-
-    
 </template>

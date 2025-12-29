@@ -22,12 +22,12 @@
                 "imagePath": {
                     "name": "img",
                     "type": "imagePath",
-                    "value": "/images/InstagramSliderBg.avif"
+                    "value": "/images/arrow_substract_secondary.svg"
                 },
                 "text": {
                     "name": "txt",
                     "type": "text",
-                    "value": "lorem i"
+                    "value": "lorem ihgfjfghj"
                 }
             },
             {
