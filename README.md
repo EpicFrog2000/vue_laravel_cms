@@ -35,7 +35,6 @@ TODO:
 - Validate cms.json
 - change cms.json to allow for atomic operations
 - more types cms elements
-- login to obtain admin permissions
 - option hide/show cms elements
 - documentation
 - creating and customizing new sites

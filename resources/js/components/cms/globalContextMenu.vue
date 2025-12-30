@@ -83,7 +83,34 @@ const globalMenuItems = [
             }
         },
     },
+    {
+        label: 'Wyloguj',
+        command: () => {
+            Logout();
+        },
+    }
 ];
+
+import { router } from '@inertiajs/vue3';
+async function Logout(){
+    const token = document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute('content') ?? undefined;
+    if(!token){
+        toast.add({ severity: 'success', summary: 'Nie udało się wylogować. Brak tokena', life: 3000 });
+        return;
+    }
+	const res = await fetch('/logout', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': token },
+	});
+    if(res.ok){
+        router.visit('/');
+    }else{
+        toast.add({ severity: 'success', summary: 'Nie udało się wylogować', life: 3000 });
+    }
+}
+
 </script>
 <template>
     <ContextMenu global :model="globalMenuItems" />

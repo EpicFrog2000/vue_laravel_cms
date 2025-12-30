@@ -3,16 +3,18 @@ import AdminMenu from '@/components/cms/AdminStuff.vue';
 import CustomComponent from '@/components/cms/CustomComponent.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
-const props = defineProps<{ cmsData: any }>();
+const props = defineProps<{ cmsData: any, auth: any }>();
 const cmsData = ref(props.cmsData);
 </script>
 
 <template>
+    Zalogowano: {{ auth ? 'true':'false' }}
+    <br/>
     <Head>
         <title>{{ cmsData.settings.title }}</title>
     </Head>
 
-    <AdminMenu />
+    <AdminMenu v-if="auth" />
     <Link
         v-cms-link-element="['sample_link_element']"
         :href="cmsData.sample_link_element?.href ?? 'Lorem ipsum'"

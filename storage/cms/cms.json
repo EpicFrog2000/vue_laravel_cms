@@ -67,7 +67,7 @@
                 }
             }
         ],
-        "text_test": "<div class=\"ql-editor\" contenteditable=\"false\"><h1>Lorem ipsumds<strong>fgdsfg</strong></h1><ol><li data-list=\"ordered\"><span class=\"ql-ui\" contenteditable=\"false\"></span>dfgskdfg</li><li data-list=\"ordered\"><span class=\"ql-ui\" contenteditable=\"false\"></span>sdfg</li><li data-list=\"ordered\"><span class=\"ql-ui\" contenteditable=\"false\"></span>sdfg</li></ol><p>sdfg</p><p>sfd</p><p>gsdfg</p></div>",
+        "text_test": "<div class=\"ql-editor\" contenteditable=\"false\"><h1>Lorem ipsumds<strong>fgdsfg</strong></h1><ol><li data-list=\"ordered\"><span class=\"ql-ui\" contenteditable=\"false\"></span>dfdfasf</li><li data-list=\"ordered\"><span class=\"ql-ui\" contenteditable=\"false\"></span>sdfgasdf</li></ol><p>sdfg</p><p>sfd</p><p>gsdfg</p></div>",
         "image_1": "/images/arrow_substract_secondary.svg",
         "sample_link_element": {
             "href": "https://vue_laravel_cms.test/Lorem%20ipsum",

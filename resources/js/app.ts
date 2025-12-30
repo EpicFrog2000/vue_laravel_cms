@@ -8,11 +8,11 @@ import PrimeVue from 'primevue/config';
 import { createApp, h } from 'vue';
 const pinia = createPinia();
 
-import cms_custom_element from './directives/cms_custom_element';
-import cms_image_element from './directives/cms_image_element';
-import cms_link_element from './directives/cms_link_element';
-import cms_element from './directives/cms_text_element';
-import cms_video_element from './directives/cms_video_element';
+import createCustomCmsElement from './directives/cms_custom_element';
+import createImageCmsElement from './directives/cms_image_element';
+import createLinkCmsElement from './directives/cms_link_element';
+import createTextCmsElement from './directives/cms_text_element';
+import createVideoCmsElement from './directives/cms_video_element';
 
 import 'quill/dist/quill.bubble.css';
 import 'quill/dist/quill.core.css';
@@ -32,21 +32,19 @@ createInertiaApp({
         });
     },
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
+        const app = createApp({ render: () => h(App, props) })
+        const auth:boolean = <boolean>props.initialPage.props.auth;
+        app
             .use(plugin)
-            .use(PrimeVue, {
-                theme: {
-                    preset: Aura,
-                },
-            })
+            .use(PrimeVue, { theme: { preset: Aura } })
             .use(pinia)
-            .directive('cms-text-element', cms_element)
-            .directive('cms-image-element', cms_image_element)
-            .directive('cms-link-element', cms_link_element)
-            .directive('cms-custom-element', cms_custom_element)
-            .directive('cms-video-element', cms_video_element)
+            .directive('cms-text-element', createTextCmsElement(auth))
+            .directive('cms-image-element', createImageCmsElement(auth))
+            .directive('cms-link-element', createLinkCmsElement(auth))
+            .directive('cms-custom-element', createCustomCmsElement(auth))
+            .directive('cms-video-element', createVideoCmsElement(auth))
             .use(ToastService)
             .use(DialogService)
-            .mount(el);
-    },
+            .mount(el)
+    }
 });

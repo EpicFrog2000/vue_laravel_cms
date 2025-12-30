@@ -1,6 +1,6 @@
 import { saveCmsData } from '@/composables/cms';
 import { actionResponse } from '@/types/cmsTypes';
-
+import { Directive } from 'vue';
 let Quill: any = null;
 
 interface handlerEvent {
@@ -61,46 +61,55 @@ function removeQuill(el: CmsElement) {
     el.quil = null;
 }
 
-export default {
-    beforeMount: async (el: CmsElement, binding: any) => {
-        if (!binding.value) {
-            el.style.border = '2px solid red';
-            el.title = 'Brak wartości cms-value!';
-            return;
-        }
-        el.cms_value_path = binding.value;
-        el.__cmsHandlers = [];
 
-        if (!Quill && typeof document !== 'undefined') {
-            const { default: quill } = await import('quill');
-            Quill = quill;
-        }
 
-        const handler = MakeEditable(el);
-        el.__cmsHandlers.push({ event: handler, event_type: 'click' });
-        el.addEventListener('click', handler);
+export default function createTextCmsElement(auth:boolean): Directive {
+	return {
+        mounted: async (el: CmsElement, binding: any) => {
+            if(!auth) return;
 
-        const base = el.style.boxShadow;
-        const showBorder = (e: KeyboardEvent) =>
-            e.ctrlKey && (el.style.boxShadow = '0 0 6px 2px rgba(0,255,0,0.7)');
-        const hideBorder = () => (el.style.boxShadow = base);
+            if (!binding.value) {
+                el.style.border = '2px solid red';
+                el.title = 'Brak wartości cms-value!';
+                return;
+            }
+            el.cms_value_path = binding.value;
+            el.__cmsHandlers = [];
 
-        el.__cmsHandlers.push({ event: showBorder, event_type: 'keydown' });
-        el.__cmsHandlers.push({ event: hideBorder, event_type: 'keyup' });
+            if (!Quill && typeof document !== 'undefined') {
+                const { default: quill } = await import('quill');
+                Quill = quill;
+            }
 
-        window.addEventListener('keydown', showBorder);
-        window.addEventListener('keyup', hideBorder);
-        cms_elements.push(el);
-    },
-    beforeUnmount(el: CmsElement) {
-        for (const h of el.__cmsHandlers) {
-            window.removeEventListener(h.event_type, h.event as any);
-        }
-        el.__cmsHandlers = [];
-        const i = cms_elements.indexOf(el);
-        if (i !== -1) cms_elements.splice(i, 1);
-    },
-};
+            const handler = MakeEditable(el);
+            el.__cmsHandlers.push({ event: handler, event_type: 'click' });
+            el.addEventListener('click', handler);
+
+            const base = el.style.boxShadow;
+            const showBorder = (e: KeyboardEvent) =>
+                e.ctrlKey && (el.style.boxShadow = '0 0 6px 2px rgba(0,255,0,0.7)');
+            const hideBorder = () => (el.style.boxShadow = base);
+
+            el.__cmsHandlers.push({ event: showBorder, event_type: 'keydown' });
+            el.__cmsHandlers.push({ event: hideBorder, event_type: 'keyup' });
+
+            window.addEventListener('keydown', showBorder);
+            window.addEventListener('keyup', hideBorder);
+            cms_elements.push(el);
+        },
+        beforeUnmount(el: CmsElement) {
+            for (const h of el.__cmsHandlers) {
+                window.removeEventListener(h.event_type, h.event as any);
+            }
+            el.__cmsHandlers = [];
+            const i = cms_elements.indexOf(el);
+            if (i !== -1) cms_elements.splice(i, 1);
+        },
+	}
+}
+
+
+
 
 function decodedValue(value: string) {
     return value.replace(/&lt;/g, '<').replace(/&gt;/g, '>');

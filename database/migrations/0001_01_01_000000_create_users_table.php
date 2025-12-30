@@ -3,7 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 return new class extends Migration
 {
     /**
@@ -15,10 +16,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->boolean('active')->default(true);
+            $table->unsignedInteger('updated_by')->nullable(true);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -35,6 +37,15 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        User::create([
+            'name' => 'Norbert',
+            'email' => 'tasarz_norbert@wp.pl',
+            'password' => Hash::make('haslo123'),
+            'created_at' => now(),
+            'updated_at'=> now(),
+            'active' => true,
+        ]);
     }
 
     /**
@@ -42,7 +53,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists(table: 'users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
