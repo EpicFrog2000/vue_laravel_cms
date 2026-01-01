@@ -15,6 +15,7 @@ const cmsData = ref(props.cmsData);
     </Head>
 
     <AdminMenu v-if="auth" />
+    
     <Link
         v-cms-link-element="['sample_link_element']"
         :href="cmsData.sample_link_element?.href ?? 'Lorem ipsum'"
@@ -63,4 +64,7 @@ const cmsData = ref(props.cmsData);
     />
     <br />
     <br />
+
+    <div v-cms-text-element="['tekst_test_new']" v-html="cmsData['tekst_test_new'] ?? 'lorem ipsum'"></div>
+
 </template>

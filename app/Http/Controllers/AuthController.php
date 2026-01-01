@@ -19,7 +19,7 @@ class AuthController extends Controller
         if ($user) {
             Auth::login($user);
             $request->session()->put('auth', true);
-            return Inertia::render('Home');
+            return response(200);
         }
         return response('Auth failed', 401);
     }
@@ -28,6 +28,6 @@ class AuthController extends Controller
     public function logout(Request $request){
         $request->session()->forget('auth');
         $request->session()->invalidate();
-        return Inertia::render('Home');
+        return response(200);
     }
 }

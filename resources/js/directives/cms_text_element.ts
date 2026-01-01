@@ -61,8 +61,6 @@ function removeQuill(el: CmsElement) {
     el.quil = null;
 }
 
-
-
 export default function createTextCmsElement(auth:boolean): Directive {
 	return {
         mounted: async (el: CmsElement, binding: any) => {

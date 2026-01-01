@@ -91,7 +91,6 @@ const globalMenuItems = [
     }
 ];
 
-import { router } from '@inertiajs/vue3';
 async function Logout(){
     const token = document
         .querySelector('meta[name="csrf-token"]')
@@ -105,7 +104,7 @@ async function Logout(){
 		headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': token },
 	});
     if(res.ok){
-        router.visit('/');
+        window.location.href = '/';
     }else{
         toast.add({ severity: 'success', summary: 'Nie udało się wylogować', life: 3000 });
     }

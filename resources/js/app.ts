@@ -20,6 +20,7 @@ import 'quill/dist/quill.core.css';
 import DialogService from 'primevue/dialogservice';
 import ToastService from 'primevue/toastservice';
 
+
 createInertiaApp({
     title: (title) => title,
     resolve: (name) => {

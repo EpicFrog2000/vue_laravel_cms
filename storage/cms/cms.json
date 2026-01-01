@@ -67,7 +67,7 @@
                 }
             }
         ],
-        "text_test": "<div class=\"ql-editor\" contenteditable=\"false\"><h1>Lorem ipsumds<strong>fgdsfg</strong></h1><ol><li data-list=\"ordered\"><span class=\"ql-ui\" contenteditable=\"false\"></span>dfdfasf</li><li data-list=\"ordered\"><span class=\"ql-ui\" contenteditable=\"false\"></span>sdfgasdf</li></ol><p>sdfg</p><p>sfd</p><p>gsdfg</p></div>",
+        "text_test": "<div class=\"ql-editor\" contenteditable=\"false\"><h1><span class=\"ql-size-small\">loremhgasdjfgsadf</span></h1><p><span class=\"ql-size-large\">qwerasdfasdfkqhgjghjr</span></p><p><span class=\"ql-size-huge\">qwer</span></p><p>yujkghjk</p></div>",
         "image_1": "/images/arrow_substract_secondary.svg",
         "sample_link_element": {
             "href": "https://vue_laravel_cms.test/Lorem%20ipsum",
@@ -87,7 +87,8 @@
             "controls": true,
             "poster": "/images/bg_image_2.jpg",
             "preload": "auto"
-        }
+        },
+        "tekst_test_new": "<div class=\"ql-editor\" contenteditable=\"false\"><p>lorem ipsqwerfqwer</p><p>qwerqwe</p><p>qwerqwe</p><p>qwerqwer</p></div>"
     },
     "cms_test": {
         "settings": {

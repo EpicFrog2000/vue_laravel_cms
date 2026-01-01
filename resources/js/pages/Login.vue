@@ -6,7 +6,7 @@ import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Button from 'primevue/button';
 import { Form } from '@primevue/forms';
-import { router } from '@inertiajs/vue3';
+
 const toast = useToast();
 
 const initialValues = ref({
@@ -31,7 +31,7 @@ const onFormSubmit = async (e) => {
 		body: JSON.stringify(e.values)
 	});
     if(res.ok){
-        router.visit('/');
+        window.location.href = '/';
     }else{
         toast.add({ severity: 'success', summary: 'Nie udało się zalogować', life: 3000 });
     }
